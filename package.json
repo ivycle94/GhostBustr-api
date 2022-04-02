@@ -1,13 +1,14 @@
 {
-  "name": "express-auth-mongoose-boilerplate",
+  "name": "ghostbustr",
   "version": "1.0.0",
-  "description": "Auth boilerplate for mongoose express using token auth",
+  "description": "an app to find and track visits of haunted locations",
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "seed": "node ./app/models/seed.js"
   },
-  "author": "Timm Schoenborn",
+  "author": "Laurie Domino, Ivy Le, Kai Smith, Stevie Militello",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
