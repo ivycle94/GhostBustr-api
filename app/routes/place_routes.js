@@ -4,7 +4,7 @@ const express = require('express')
 const passport = require('passport')
 
 // pull in Mongoose model for examples
-const Example = require('../models/example')
+const Place = require('../models/place')
 
 // this is a collection of methods that help us detect situations when we need
 // to throw a custom error
@@ -28,17 +28,17 @@ const requireToken = passport.authenticate('bearer', { session: false })
 const router = express.Router()
 
 // INDEX
-// GET /examples
-router.get('/examples', requireToken, (req, res, next) => {
-	Example.find()
-		.then((examples) => {
-			// `examples` will be an array of Mongoose documents
+// GET /spookyplaces
+router.get('/spookyplaces', (req, res, next) => {
+	Place.find()
+		.then((place) => {
+			// `place` will be an array of Mongoose documents
 			// we want to convert each one to a POJO, so we use `.map` to
 			// apply `.toObject` to each one
-			return examples.map((example) => example.toObject())
+			return place.map((place) => place.toObject())
 		})
-		// respond with status 200 and JSON of the examples
-		.then((examples) => res.status(200).json({ examples: examples }))
+		// respond with status 200 and JSON of the place
+		.then((place) => res.status(200).json({ place: place }))
 		// if an error occurs, pass it to the handler
 		.catch(next)
 })
@@ -56,15 +56,15 @@ router.get('/examples/:id', requireToken, (req, res, next) => {
 })
 
 // CREATE
-// POST /examples
-router.post('/examples', requireToken, (req, res, next) => {
+// POST /spookyplaces
+router.post('/spookyplaces', requireToken, (req, res, next) => {
 	// set owner of new example to be current user
-	req.body.example.owner = req.user.id
+	req.body.place.owner = req.user.id
 
-	Example.create(req.body.example)
-		// respond to succesful `create` with status 201 and JSON of new "example"
-		.then((example) => {
-			res.status(201).json({ example: example.toObject() })
+	Place.create(req.body.place)
+		// respond to succesful `create` with status 201 and JSON of new "place"
+		.then((place) => {
+			res.status(201).json({ place: place.toObject() })
 		})
 		// if an error occurs, pass it off to our error handler
 		// the error handler needs the error message and the `res` object so that it
