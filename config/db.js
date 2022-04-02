@@ -5,7 +5,9 @@ const mongooseBaseName = 'GhostBustr-api'
 
 // create the mongodb uri for development and test
 const database = {
-	development: `mongodb://localhost/${mongooseBaseName}-development`,
+	// if localhost onn line 10 doesn't work
+	development: `mongodb://127.0.0.1:27017/${mongooseBaseName}-development`,
+	// development: `mongodb://localhost/${mongooseBaseName}-development`,
 	test: `mongodb://localhost/${mongooseBaseName}-test`,
 }
 
