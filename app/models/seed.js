@@ -1,6 +1,6 @@
 // require our dependencies
 
-const mongoose = require('./connection')
+const mongoose = require('mongoose')
 const Place = require('./place')
 
 const db = require('../../config/db')
@@ -219,7 +219,7 @@ mongoose.connect(db, {
                 console.log('deleted places', deletedPlaces)
                 // then we create using the startPets array
                 // we'll use console logs to check if it's working or if there are errors
-                Pet.create(starterPlaces)
+                Place.create(starterPlaces)
                     .then(newPlaces => {
                         console.log('the new places', newPlaces)
                         mongoose.connection.close()
