@@ -44,13 +44,15 @@ router.get('/spookyplaces', (req, res, next) => {
 })
 
 // SHOW
-// GET /examples/5a7db6c74d55bc51bdf39793
-router.get('/examples/:id', requireToken, (req, res, next) => {
+// GET /spookyplaces/5a7db6c74d55bc51bdf39793
+router.get('/spookyplaces/:id', (req, res, next) => {
 	// req.params.id will be set based on the `:id` in the route
-	Example.findById(req.params.id)
+	Place.findById(req.params.id)
+		.populate('owner')
 		.then(handle404)
 		// if `findById` is succesful, respond with 200 and "example" JSON
-		.then((example) => res.status(200).json({ example: example.toObject() }))
+
+		.then((place) => res.status(200).json({ place: place.toObject() }))
 		// if an error occurs, pass it to the handler
 		.catch(next)
 })
@@ -73,21 +75,21 @@ router.post('/spookyplaces', requireToken, (req, res, next) => {
 })
 
 // UPDATE
-// PATCH /examples/5a7db6c74d55bc51bdf39793
-router.patch('/examples/:id', requireToken, removeBlanks, (req, res, next) => {
+// PATCH /spookyplaces/5a7db6c74d55bc51bdf39793
+router.patch('/spookyplaces/:id', requireToken, removeBlanks, (req, res, next) => {
 	// if the client attempts to change the `owner` property by including a new
 	// owner, prevent that by deleting that key/value pair
-	delete req.body.example.owner
+	delete req.body.place.owner
 
-	Example.findById(req.params.id)
+	Place.findById(req.params.id)
 		.then(handle404)
-		.then((example) => {
+		.then((place) => {
 			// pass the `req` object and the Mongoose record to `requireOwnership`
 			// it will throw an error if the current user isn't the owner
-			requireOwnership(req, example)
+			requireOwnership(req, place)
 
 			// pass the result of Mongoose's `.update` to the next `.then`
-			return example.updateOne(req.body.example)
+			return place.updateOne(req.body.place)
 		})
 		// if that succeeded, return 204 and no JSON
 		.then(() => res.sendStatus(204))
@@ -96,15 +98,15 @@ router.patch('/examples/:id', requireToken, removeBlanks, (req, res, next) => {
 })
 
 // DESTROY
-// DELETE /examples/5a7db6c74d55bc51bdf39793
-router.delete('/examples/:id', requireToken, (req, res, next) => {
-	Example.findById(req.params.id)
+// DELETE /spookyplaces/5a7db6c74d55bc51bdf39793
+router.delete('/spookyplaces/:id', requireToken, (req, res, next) => {
+	Place.findById(req.params.id)
 		.then(handle404)
-		.then((example) => {
-			// throw an error if current user doesn't own `example`
-			requireOwnership(req, example)
-			// delete the example ONLY IF the above didn't throw
-			example.deleteOne()
+		.then((place) => {
+			// throw an error if current user doesn't own `place`
+			requireOwnership(req, place)
+			// delete the place ONLY IF the above didn't throw
+			place.deleteOne()
 		})
 		// send back 204 and no content if the deletion succeeded
 		.then(() => res.sendStatus(204))
