@@ -14,6 +14,20 @@ const router = express.Router()
 
 // ROUTES GO HERE
 
+// INDEX
+// GET /myvisits
+router.get('/myvisits', (req, res, next) => {
+    Visit.find()
+        .populate('owner')
+        .then(handle404)
+        .then((visit) => {
+            // requireOwnership(req, visit)
+            return visit.map((visit) => visit.toObject())
+        })
+        .then((visit) => res.status(200).json({ visit: visit }))
+        .catch(next)
+})
+
 // POST -> create a visit
 // POST /visit/<place_id>
 router.post('/visit/:placeId', requireToken, removeBlanks, (req, res, next) => {
@@ -26,34 +40,24 @@ router.post('/visit/:placeId', requireToken, removeBlanks, (req, res, next) => {
             console.log('this was returned from create', visit)
             res.status(201).json({ visit: visit.toObject() })
         })
-        .catch((err) => {
-            console.log(err)
-            res.json({ err })
-        })
+        .catch(next)
 })
 
 
 // SHOW
 // GET /visit/5a7db6c74d55bc51bdf39793
-// router.get('/visit/:visitId', (req, res, next) => {
-//     // req.params.id will be set based on the `:id` in the route
-//     const visitId = req.params.visitId
-//     Visit.findById(visitId)
-//         .populate('owner')
-//         .then(handle404)
-//         // if `findById` is succesful, respond with 200 and "example" JSON
-//         .then((visit) => {
-//             // pass the `req` object and the Mongoose record to `requireOwnership`
-//             // it will throw an error if the current user isn't the owner
-//             requireOwnership(req, visit)
-//             res.status(200).json({ visit: visit.toObject() })
-//                 // if an error occurs, pass it to the handler
-//                 .catch(next)
+router.get('/visit/:id', (req, res, next) => {
+    const visitId = req.params.id
+    Visit.findById(visitId)
+        .populate('owner')
+        .then(handle404)
+        .then((visit) => {
+            res.status(200).json({ visit: visit.toObject() })
+                // if an error occurs, pass it to the handler
+                .catch(next)
 
-//         })
-// })
-
-
+        })
+})
 
 // UPDATE
 // PATCH /visit/<place_id>/<visit_id>
