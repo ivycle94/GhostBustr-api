@@ -38,7 +38,7 @@ router.get('/spookyplaces', (req, res, next) => {
 			return place.map((place) => place.toObject())
 		})
 		// respond with status 200 and JSON of the place
-		.then((place) => res.status(200).json({ place: place }))
+		.then((place) => res.status(200).json({ places: place }))
 		// if an error occurs, pass it to the handler
 		.catch(next)
 })
