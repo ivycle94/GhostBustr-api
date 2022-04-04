@@ -25,10 +25,10 @@ const placeSchema = new Schema(
             min: 1,
             max: 10
         },
-        visited: {
-            type: Boolean,
-            required: true,
-        },
+        visitors: [{
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+        }],
         owner: {
             type: Schema.Types.ObjectId,
             ref: 'User'
