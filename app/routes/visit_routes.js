@@ -30,18 +30,52 @@ router.get('/myvisits', (req, res, next) => {
 
 // POST -> create a visit
 // POST /visit/<place_id>
+// router.post('/visit/:placeId', requireToken, removeBlanks, (req, res, next) => {
+//     const visit = req.body.visit
+//     visit.destination = req.params.placeId
+//     req.body.visit.owner = req.user.id
+
+//     Visit.create(visit)
+//         .then((visit) => {
+//             console.log('this was returned from create', visit)
+//             res.status(201).json({ visit: visit.toObject() })
+//         })
+//         .catch(next)
+// })
+
+
 router.post('/visit/:placeId', requireToken, removeBlanks, (req, res, next) => {
+
     const visit = req.body.visit
+    const visitId = req.params.id
+
     visit.destination = req.params.placeId
     req.body.visit.owner = req.user.id
+    console.log('req.params.placeId', req.params.placeId);
 
-    Visit.create(visit)
-        .then((visit) => {
-            console.log('this was returned from create', visit)
-            res.status(201).json({ visit: visit.toObject() })
+    Place.findById(req.params.placeId)
+        // .then(handle404)
+        .then(place => {
+            console.log('this is place', place);
+            Visit.create(visit)
+                .then((visit) => {
+                    console.log('this was returned from create', visit)
+                    console.log("visit owner", visit.owner);
+                    // console.log('this is place #2', place);
+
+
+                    place.visitors.push(visit.owner)
+                    place.save()
+                    res.status(201).json({ visit: visit.toObject() })
+
+
+                })
+
         })
-        .catch(next)
 })
+
+
+
 
 
 // SHOW
