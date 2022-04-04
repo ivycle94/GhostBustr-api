@@ -83,7 +83,7 @@ router.post('/spookyplaces/newfavorite', requireToken, (req, res, next) => {
 
 	Place.create(req.body.place)
 		.then((place) => {
-			// requireOwnership(req, place)
+			requireOwnership(req, place)
 			res.status(201).json({ place: place.toObject() })
 		})
 		.catch(next)
@@ -94,7 +94,7 @@ router.post('/spookyplaces/newfavorite', requireToken, (req, res, next) => {
 router.get('/spookyplaces/mine', (req, res, next) => {
 	const { username, userId, loggedIn } = req.session
 	Place.find({ owner: userId })
-		.then((place) => res.status(200).json({ places: place.toObject() }))
+		.then((place) => res.status(200).json({ place: place.toObject() }))
 
 		.catch(next)
 
