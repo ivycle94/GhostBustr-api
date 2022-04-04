@@ -57,6 +57,8 @@ router.get('/spookyplaces/:id', (req, res, next) => {
 		.catch(next)
 })
 
+
+
 // CREATE
 // POST /spookyplaces
 router.post('/spookyplaces', requireToken, (req, res, next) => {
@@ -72,6 +74,30 @@ router.post('/spookyplaces', requireToken, (req, res, next) => {
 		// the error handler needs the error message and the `res` object so that it
 		// can send an error message back to the client
 		.catch(next)
+})
+
+// CREATE --> for favorites list route that actually calls the db and makes a new document
+// POST /spookyplaces/favorite
+router.post('/spookyplaces/newfavorite', requireToken, (req, res, next) => {
+	req.body.place.owner = req.user.id
+
+	Place.create(req.body.place)
+		.then((place) => {
+			// requireOwnership(req, place)
+			res.status(201).json({ place: place.toObject() })
+		})
+		.catch(next)
+})
+
+// SHOW -->	route to display place selected as a favorite
+// GET
+router.get('/spookyplaces/mine', (req, res, next) => {
+	const { username, userId, loggedIn } = req.session
+	Place.find({ owner: userId })
+		.then((place) => res.status(200).json({ places: place.toObject() }))
+
+		.catch(next)
+
 })
 
 // UPDATE
