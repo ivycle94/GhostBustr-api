@@ -94,7 +94,7 @@ router.get('/myvisit/:id', (req, res, next) => {
 })
 
 // UPDATE
-// PATCH /visit/<place_id>/<visit_id>
+// PATCH /visit/<visit_id>
 router.patch('/visit/:visitId', requireToken, removeBlanks, (req, res, next) => {
     const visitId = req.params.visitId
     // const placeId = req.params.placeId
@@ -118,8 +118,8 @@ router.patch('/visit/:visitId', requireToken, removeBlanks, (req, res, next) => 
 
 
 // DELETE -> delete a visit
-// DELETE /visit/<place_id>/<visit_id>
-router.delete('/visit/:placeId/:visitId', requireToken, (req, res, next) => {
+// DELETE /visit/<visit_id>
+router.delete('/visit/:visitId', requireToken, (req, res, next) => {
     const visitId = req.params.visitId
     Visit.findById(visitId)
         .then(handle404)
