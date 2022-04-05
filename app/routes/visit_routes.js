@@ -95,7 +95,7 @@ router.get('/myvisit/:id', (req, res, next) => {
 
 // UPDATE
 // PATCH /visit/<place_id>/<visit_id>
-router.patch('/visit/:placeId/:visitId', requireToken, removeBlanks, (req, res, next) => {
+router.patch('/visit/:visitId', requireToken, removeBlanks, (req, res, next) => {
     const visitId = req.params.visitId
     // const placeId = req.params.placeId
 
