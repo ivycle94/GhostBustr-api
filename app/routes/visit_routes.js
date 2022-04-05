@@ -80,15 +80,15 @@ router.post('/visit/:placeId', requireToken, removeBlanks, (req, res, next) => {
 
 // SHOW
 // GET /visit/5a7db6c74d55bc51bdf39793
-router.get('/visit/:id', (req, res, next) => {
+router.get('/myvisit/:id', (req, res, next) => {
     const visitId = req.params.id
     Visit.findById(visitId)
         .populate('owner')
         .then(handle404)
         .then((visit) => {
             res.status(200).json({ visit: visit.toObject() })
-                // if an error occurs, pass it to the handler
-                .catch(next)
+            // if an error occurs, pass it to the handler
+            // .catch(next)
 
         })
 })
