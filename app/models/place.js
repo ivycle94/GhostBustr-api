@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const User = require('./user')
 
 const { Schema, model } = mongoose
 
@@ -55,4 +56,4 @@ placeSchema.virtual('scareFactor').get(function () {
 })
 
 
-module.exports = model('place', placeSchema)
+module.exports = model('Place', placeSchema)

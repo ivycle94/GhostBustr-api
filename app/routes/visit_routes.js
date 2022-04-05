@@ -19,6 +19,7 @@ const router = express.Router()
 router.get('/myvisits', (req, res, next) => {
     Visit.find()
         .populate('owner')
+        .populate('destination')
         .then(handle404)
         .then((visit) => {
             // requireOwnership(req, visit)
@@ -84,6 +85,7 @@ router.get('/myvisit/:id', (req, res, next) => {
     const visitId = req.params.id
     Visit.findById(visitId)
         .populate('owner')
+        .populate('destination')
         .then(handle404)
         .then((visit) => {
             res.status(200).json({ visit: visit.toObject() })
