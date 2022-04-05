@@ -7,15 +7,15 @@ const visitSchema = new Schema(
     {
         visitFromDate: {
             type: Date,
-            required: true,
+            // required: true,
         },
         visitToDate: {
             type: Date,
-            required: true,
+            // required: true,
         },
         description: {
             type: String,
-            required: true,
+            // required: true,
         },
         visitRating: {
             type: Number,
