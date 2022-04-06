@@ -295,6 +295,7 @@ router.patch('/spookyplaces/:id', requireToken, removeBlanks, (req, res, next) =
 // DESTROY
 // DELETE /spookyplaces/5a7db6c74d55bc51bdf39793
 router.delete('/spookyplaces/:id', requireToken, (req, res, next) => {
+	// console.log();
 	Place.findById(req.params.id)
 		.then(handle404)
 		.then((place) => {
@@ -302,6 +303,15 @@ router.delete('/spookyplaces/:id', requireToken, (req, res, next) => {
 			requireOwnership(req, place)
 			// delete the place ONLY IF the above didn't throw
 			place.deleteOne()
+			// Visit.find()
+			// .then(handle404)
+			// .then((visit) => {
+			// // throw an error if current user doesn't own `place`
+			// requireOwnership(req, place)
+			// // delete the place ONLY IF the above didn't throw
+			// visit.deleteOne()
+			// )}
+
 		})
 		// send back 204 and no content if the deletion succeeded
 		.then(() => res.sendStatus(204))
