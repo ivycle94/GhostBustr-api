@@ -29,6 +29,7 @@ router.get('/myvisits', (req, res, next) => {
         .catch(next)
 })
 
+
 // POST -> create a visit
 // POST /visit/<place_id>
 router.post('/visit/:placeId', requireToken, removeBlanks, (req, res, next) => {
@@ -60,9 +61,6 @@ router.post('/visit/:placeId', requireToken, removeBlanks, (req, res, next) => {
 
         })
 })
-
-
-
 
 
 // SHOW
