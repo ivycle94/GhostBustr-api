@@ -19,6 +19,7 @@ const router = express.Router()
 router.get('/myvisits', (req, res, next) => {
     Visit.find()
         .populate('owner')
+        .populate('destination')
         .then(handle404)
         .then((visit) => {
             // requireOwnership(req, visit)
@@ -30,20 +31,6 @@ router.get('/myvisits', (req, res, next) => {
 
 // POST -> create a visit
 // POST /visit/<place_id>
-// router.post('/visit/:placeId', requireToken, removeBlanks, (req, res, next) => {
-//     const visit = req.body.visit
-//     visit.destination = req.params.placeId
-//     req.body.visit.owner = req.user.id
-
-//     Visit.create(visit)
-//         .then((visit) => {
-//             console.log('this was returned from create', visit)
-//             res.status(201).json({ visit: visit.toObject() })
-//         })
-//         .catch(next)
-// })
-
-
 router.post('/visit/:placeId', requireToken, removeBlanks, (req, res, next) => {
 
     const visit = req.body.visit
@@ -84,6 +71,7 @@ router.get('/myvisit/:id', (req, res, next) => {
     const visitId = req.params.id
     Visit.findById(visitId)
         .populate('owner')
+        .populate('destination')
         .then(handle404)
         .then((visit) => {
             res.status(200).json({ visit: visit.toObject() })

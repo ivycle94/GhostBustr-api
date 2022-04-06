@@ -1,4 +1,6 @@
 const mongoose = require('mongoose')
+const User = require('./user')
+const Place = require('./place')
 
 const { Schema, model } = mongoose
 
@@ -36,4 +38,4 @@ const visitSchema = new Schema(
 )
 
 
-module.exports = model('visit', visitSchema)
+module.exports = model('Visit', visitSchema)
