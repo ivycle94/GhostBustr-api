@@ -43,6 +43,176 @@ router.get('/spookyplaces', (req, res, next) => {
 		.catch(next)
 })
 
+// INDEX 
+// GET /spookyplaces/scarelevelone 
+
+router.get('/spookyplaces/scarelevelone', (req, res, next) => {
+	Place.find( { scareLevel: 1 } )
+		.then((place) => {
+			// `place` will be an array of Mongoose documents
+			// we want to convert each one to a POJO, so we use `.map` to
+			// apply `.toObject` to each one
+			return place.map((place) => place.toObject())
+		})
+		// respond with status 200 and JSON of the place
+		.then((place) => res.status(200).json({ places: place }))
+		// if an error occurs, pass it to the handler
+		.catch(next)
+})
+
+// INDEX 
+// GET /spookyplaces/scareleveltwo
+
+router.get('/spookyplaces/scareleveltwo', (req, res, next) => {
+	Place.find( { scareLevel: 2 } )
+		.then((place) => {
+			// `place` will be an array of Mongoose documents
+			// we want to convert each one to a POJO, so we use `.map` to
+			// apply `.toObject` to each one
+			return place.map((place) => place.toObject())
+		})
+		// respond with status 200 and JSON of the place
+		.then((place) => res.status(200).json({ places: place }))
+		// if an error occurs, pass it to the handler
+		.catch(next)
+})
+
+// INDEX 
+// GET /spookyplaces/scarelevelthree
+
+router.get('/spookyplaces/scarelevelthree', (req, res, next) => {
+	Place.find( { scareLevel: 3 } )
+		.then((place) => {
+			// `place` will be an array of Mongoose documents
+			// we want to convert each one to a POJO, so we use `.map` to
+			// apply `.toObject` to each one
+			return place.map((place) => place.toObject())
+		})
+		// respond with status 200 and JSON of the place
+		.then((place) => res.status(200).json({ places: place }))
+		// if an error occurs, pass it to the handler
+		.catch(next)
+})
+
+// INDEX 
+// GET /spookyplaces/scarelevelfour
+
+router.get('/spookyplaces/scarelevelfour', (req, res, next) => {
+	Place.find( { scareLevel: 4 } )
+		.then((place) => {
+			// `place` will be an array of Mongoose documents
+			// we want to convert each one to a POJO, so we use `.map` to
+			// apply `.toObject` to each one
+			return place.map((place) => place.toObject())
+		})
+		// respond with status 200 and JSON of the place
+		.then((place) => res.status(200).json({ places: place }))
+		// if an error occurs, pass it to the handler
+		.catch(next)
+})
+
+// INDEX 
+// GET /spookyplaces/scarelevelfive
+
+router.get('/spookyplaces/scarelevelfive', (req, res, next) => {
+	Place.find( { scareLevel: 5 } )
+		.then((place) => {
+			// `place` will be an array of Mongoose documents
+			// we want to convert each one to a POJO, so we use `.map` to
+			// apply `.toObject` to each one
+			return place.map((place) => place.toObject())
+		})
+		// respond with status 200 and JSON of the place
+		.then((place) => res.status(200).json({ places: place }))
+		// if an error occurs, pass it to the handler
+		.catch(next)
+})
+
+// INDEX 
+// GET /spookyplaces/scarelevelsix
+
+router.get('/spookyplaces/scarelevelsix', (req, res, next) => {
+	Place.find( { scareLevel: 6 } )
+		.then((place) => {
+			// `place` will be an array of Mongoose documents
+			// we want to convert each one to a POJO, so we use `.map` to
+			// apply `.toObject` to each one
+			return place.map((place) => place.toObject())
+		})
+		// respond with status 200 and JSON of the place
+		.then((place) => res.status(200).json({ places: place }))
+		// if an error occurs, pass it to the handler
+		.catch(next)
+})
+
+// INDEX 
+// GET /spookyplaces/scarelevelseven
+
+router.get('/spookyplaces/scarelevelseven', (req, res, next) => {
+	Place.find( { scareLevel: 7 } )
+		.then((place) => {
+			// `place` will be an array of Mongoose documents
+			// we want to convert each one to a POJO, so we use `.map` to
+			// apply `.toObject` to each one
+			return place.map((place) => place.toObject())
+		})
+		// respond with status 200 and JSON of the place
+		.then((place) => res.status(200).json({ places: place }))
+		// if an error occurs, pass it to the handler
+		.catch(next)
+})
+
+// INDEX 
+// GET /spookyplaces/scareleveleight
+
+router.get('/spookyplaces/scareleveleight', (req, res, next) => {
+	Place.find( { scareLevel: 8 } )
+		.then((place) => {
+			// `place` will be an array of Mongoose documents
+			// we want to convert each one to a POJO, so we use `.map` to
+			// apply `.toObject` to each one
+			return place.map((place) => place.toObject())
+		})
+		// respond with status 200 and JSON of the place
+		.then((place) => res.status(200).json({ places: place }))
+		// if an error occurs, pass it to the handler
+		.catch(next)
+})
+
+// INDEX 
+// GET /spookyplaces/scarelevelnine
+
+router.get('/spookyplaces/scarelevelnine', (req, res, next) => {
+	Place.find( { scareLevel: 9 } )
+		.then((place) => {
+			// `place` will be an array of Mongoose documents
+			// we want to convert each one to a POJO, so we use `.map` to
+			// apply `.toObject` to each one
+			return place.map((place) => place.toObject())
+		})
+		// respond with status 200 and JSON of the place
+		.then((place) => res.status(200).json({ places: place }))
+		// if an error occurs, pass it to the handler
+		.catch(next)
+})
+
+// INDEX 
+// GET /spookyplaces/scarelevelten
+
+router.get('/spookyplaces/scarelevelten', (req, res, next) => {
+	Place.find( { scareLevel: 10 } )
+		.then((place) => {
+			// `place` will be an array of Mongoose documents
+			// we want to convert each one to a POJO, so we use `.map` to
+			// apply `.toObject` to each one
+			return place.map((place) => place.toObject())
+		})
+		// respond with status 200 and JSON of the place
+		.then((place) => res.status(200).json({ places: place }))
+		// if an error occurs, pass it to the handler
+		.catch(next)
+})
+
 // SHOW
 // GET /spookyplaces/5a7db6c74d55bc51bdf39793
 router.get('/spookyplaces/:id', (req, res, next) => {
