@@ -19,6 +19,7 @@ const requireOwnership = customErrors.requireOwnership
 // this is middleware that will remove blank fields from `req.body`, e.g.
 // { example: { title: '', text: 'foo' } } -> { example: { text: 'foo' } }
 const removeBlanks = require('../../lib/remove_blank_fields')
+const Visit = require('../models/visit')
 // passing this as a second argument to `router.<verb>` will make it
 // so that a token MUST be passed for that route to be available
 // it will also set `req.user`
@@ -47,7 +48,7 @@ router.get('/spookyplaces', (req, res, next) => {
 // GET /spookyplaces/scarelevelone 
 
 router.get('/spookyplaces/scarelevelone', (req, res, next) => {
-	Place.find( { scareLevel: 1 } )
+	Place.find({ scareLevel: 1 })
 		.then((place) => {
 			// `place` will be an array of Mongoose documents
 			// we want to convert each one to a POJO, so we use `.map` to
@@ -64,7 +65,7 @@ router.get('/spookyplaces/scarelevelone', (req, res, next) => {
 // GET /spookyplaces/scareleveltwo
 
 router.get('/spookyplaces/scareleveltwo', (req, res, next) => {
-	Place.find( { scareLevel: 2 } )
+	Place.find({ scareLevel: 2 })
 		.then((place) => {
 			// `place` will be an array of Mongoose documents
 			// we want to convert each one to a POJO, so we use `.map` to
@@ -81,7 +82,7 @@ router.get('/spookyplaces/scareleveltwo', (req, res, next) => {
 // GET /spookyplaces/scarelevelthree
 
 router.get('/spookyplaces/scarelevelthree', (req, res, next) => {
-	Place.find( { scareLevel: 3 } )
+	Place.find({ scareLevel: 3 })
 		.then((place) => {
 			// `place` will be an array of Mongoose documents
 			// we want to convert each one to a POJO, so we use `.map` to
@@ -98,7 +99,7 @@ router.get('/spookyplaces/scarelevelthree', (req, res, next) => {
 // GET /spookyplaces/scarelevelfour
 
 router.get('/spookyplaces/scarelevelfour', (req, res, next) => {
-	Place.find( { scareLevel: 4 } )
+	Place.find({ scareLevel: 4 })
 		.then((place) => {
 			// `place` will be an array of Mongoose documents
 			// we want to convert each one to a POJO, so we use `.map` to
@@ -115,7 +116,7 @@ router.get('/spookyplaces/scarelevelfour', (req, res, next) => {
 // GET /spookyplaces/scarelevelfive
 
 router.get('/spookyplaces/scarelevelfive', (req, res, next) => {
-	Place.find( { scareLevel: 5 } )
+	Place.find({ scareLevel: 5 })
 		.then((place) => {
 			// `place` will be an array of Mongoose documents
 			// we want to convert each one to a POJO, so we use `.map` to
@@ -132,7 +133,7 @@ router.get('/spookyplaces/scarelevelfive', (req, res, next) => {
 // GET /spookyplaces/scarelevelsix
 
 router.get('/spookyplaces/scarelevelsix', (req, res, next) => {
-	Place.find( { scareLevel: 6 } )
+	Place.find({ scareLevel: 6 })
 		.then((place) => {
 			// `place` will be an array of Mongoose documents
 			// we want to convert each one to a POJO, so we use `.map` to
@@ -149,7 +150,7 @@ router.get('/spookyplaces/scarelevelsix', (req, res, next) => {
 // GET /spookyplaces/scarelevelseven
 
 router.get('/spookyplaces/scarelevelseven', (req, res, next) => {
-	Place.find( { scareLevel: 7 } )
+	Place.find({ scareLevel: 7 })
 		.then((place) => {
 			// `place` will be an array of Mongoose documents
 			// we want to convert each one to a POJO, so we use `.map` to
@@ -166,7 +167,7 @@ router.get('/spookyplaces/scarelevelseven', (req, res, next) => {
 // GET /spookyplaces/scareleveleight
 
 router.get('/spookyplaces/scareleveleight', (req, res, next) => {
-	Place.find( { scareLevel: 8 } )
+	Place.find({ scareLevel: 8 })
 		.then((place) => {
 			// `place` will be an array of Mongoose documents
 			// we want to convert each one to a POJO, so we use `.map` to
@@ -183,7 +184,7 @@ router.get('/spookyplaces/scareleveleight', (req, res, next) => {
 // GET /spookyplaces/scarelevelnine
 
 router.get('/spookyplaces/scarelevelnine', (req, res, next) => {
-	Place.find( { scareLevel: 9 } )
+	Place.find({ scareLevel: 9 })
 		.then((place) => {
 			// `place` will be an array of Mongoose documents
 			// we want to convert each one to a POJO, so we use `.map` to
@@ -200,7 +201,7 @@ router.get('/spookyplaces/scarelevelnine', (req, res, next) => {
 // GET /spookyplaces/scarelevelten
 
 router.get('/spookyplaces/scarelevelten', (req, res, next) => {
-	Place.find( { scareLevel: 10 } )
+	Place.find({ scareLevel: 10 })
 		.then((place) => {
 			// `place` will be an array of Mongoose documents
 			// we want to convert each one to a POJO, so we use `.map` to
@@ -273,9 +274,6 @@ router.get('/spookyplaces/mine', (req, res, next) => {
 // UPDATE
 // PATCH /spookyplaces/5a7db6c74d55bc51bdf39793
 router.patch('/spookyplaces/:id', requireToken, removeBlanks, (req, res, next) => {
-	// if the client attempts to change the `owner` property by including a new
-	// owner, prevent that by deleting that key/value pair
-	delete req.body.place.owner
 
 	Place.findById(req.params.id)
 		.then(handle404)
@@ -283,7 +281,7 @@ router.patch('/spookyplaces/:id', requireToken, removeBlanks, (req, res, next) =
 			// pass the `req` object and the Mongoose record to `requireOwnership`
 			// it will throw an error if the current user isn't the owner
 			requireOwnership(req, place)
-			console.log('placeeeeee', place)
+			// console.log('placeeeeee', place)
 
 			// pass the result of Mongoose's `.update` to the next `.then`
 			return place.updateOne(req.body.place)
@@ -309,6 +307,7 @@ router.delete('/spookyplaces/:id', requireToken, (req, res, next) => {
 		.then(() => res.sendStatus(204))
 		// if an error occurs, pass it to the handler
 		.catch(next)
+
 })
 
 module.exports = router
