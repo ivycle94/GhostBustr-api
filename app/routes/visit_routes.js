@@ -15,9 +15,10 @@ const router = express.Router()
 // ROUTES GO HERE
 
 // INDEX
-// GET /myvisits
-router.get('/myvisits', (req, res, next) => {
-    Visit.find()
+// GET /myvisits/<user_id>
+router.get('/myvisits/:userId', (req, res, next) => {
+    // console.log('My visit req.user._id', req.user.id);
+    Visit.find({ owner: req.params.userId })
         .populate('owner')
         .populate('destination')
         .then(handle404)
@@ -28,6 +29,7 @@ router.get('/myvisits', (req, res, next) => {
         .then((visit) => res.status(200).json({ visit: visit }))
         .catch(next)
 })
+
 
 // POST -> create a visit
 // POST /visit/<place_id>
@@ -60,9 +62,6 @@ router.post('/visit/:placeId', requireToken, removeBlanks, (req, res, next) => {
 
         })
 })
-
-
-
 
 
 // SHOW
