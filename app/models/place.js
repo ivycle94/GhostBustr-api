@@ -24,7 +24,7 @@ const placeSchema = new Schema(
         scareLevel: {
             type: Number,
             min: 1,
-            max: 10
+            max: 5
         },
         visitors: [{
             type: Schema.Types.ObjectId,
