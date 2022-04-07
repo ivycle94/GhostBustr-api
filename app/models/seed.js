@@ -177,7 +177,7 @@ const starterPlaces = [
     {
         name: "Waverly Hills Hospital",
         location: "Louisville, KY",
-        image: "https://i.imgur.com/Xsedy3d.jpg",
+        image: "https://i.imgur.com/gHoxwlY.jpg",
         description: "A hospital where nearly 50,000 people died to the tuberculosis outbreak, it is said to be extremely haunted. One of the most notable ghosts is a boy named Timmy, who is said to return a ball if it is rolled down to him.",
         scareLevel: 3,
     },
