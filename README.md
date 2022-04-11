@@ -1,6 +1,8 @@
 # TEAM GhostBustr
 
-A REST api of haunted locations. Each location has a name, description, spook level, and image.
+- A REST api of haunted locations with RESTful routes setup for: https://github.com/ivycle94/GhostBustr-client
+
+
 
 # ERD:
 ![layout](./public/ERD.png)
