@@ -61,7 +61,7 @@
 
 <h1>:scream: Description</h1>
 
-<p>Ghostbustr is an app where you view haunted locales. As a user you view haunted locales, can add haunted locales, edit and delete the haunted locales you have added, view other user's visits, add your visits, and edit and delete your views.</p>
+<p>Ghostbustr is an app where you view haunted locales. As a user you view haunted locales, can add haunted locales, edit and delete the haunted locales you have added, view other user's visits, add your visits, and edit and delete your visits.</p>
 
 <h1> :atom_symbol: Getting Started </h1>
 
